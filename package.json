@@ -1,0 +1,42 @@
+{
+  "name": "showTracker",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "agenda": "^0.8.1",
+    "async": "^2.0.1",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "~1.15.1",
+    "compression": "^1.6.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "express-session": "^1.14.0",
+    "fs": "0.0.2",
+    "jade": "~1.11.0",
+    "lodash": "^4.14.1",
+    "mongoose": "^4.5.8",
+    "morgan": "~1.7.0",
+    "nodemailer": "^2.5.0",
+    "nodemailer-smtp-transport": "^2.6.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.74.0",
+    "serve-favicon": "~2.3.0",
+    "sugar": "^2.0.0",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-uncss": "^1.0.6"
+  }
+}
