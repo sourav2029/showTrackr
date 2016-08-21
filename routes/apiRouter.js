@@ -63,7 +63,7 @@ apiRouter.post('/shows', function(req, res, next) {
     function(callback) {
       var option={
         url: 'http://thetvdb.com/api/GetSeries.php?seriesname='+seriesName,
-        proxy: 'http://192.168.3.1:8080'
+        //proxy: 'http://192.168.3.1:8080'
       };
       request.get(option, function(error, response, body) {
         if (error) return next(error);
@@ -79,7 +79,7 @@ apiRouter.post('/shows', function(req, res, next) {
     function(seriesId, callback) {
       var option={
         url:'http://thetvdb.com/api/' + apiKey + '/series/' + seriesId + '/all/en.xml',
-        proxy: 'http://192.168.3.1:8080'
+        //proxy: 'http://192.168.3.1:8080'
       };
       request.get(option, function(error, response, body) {
         if (error) return next(error);
@@ -118,7 +118,7 @@ apiRouter.post('/shows', function(req, res, next) {
     function(show, callback) {
       var option={
           url:'http://thetvdb.com/banners/' + show.poster,
-          proxy: 'http://192.168.3.1:8080',
+          //proxy: 'http://192.168.3.1:8080',
           encoding:'binary'
       };
       request.get(option, function (err, response, body) {
