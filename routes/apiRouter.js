@@ -36,7 +36,7 @@ apiRouter.get('/shows', function(req, res, next) {
       }});
     //query.where({ name: new RegExp('^' + '[' + req.query.alphabet + ']', 'i') });
   } else {
-    query=Show.aggregate({$project: {
+    query=Show.aggregate({ $sort : { rating:1 } },{$project: {
           name: 1,
           poster: 1,
           episodeCount: {$size: '$episodes'}
@@ -63,7 +63,7 @@ apiRouter.post('/shows', function(req, res, next) {
     function(callback) {
       var option={
         url: 'http://thetvdb.com/api/GetSeries.php?seriesname='+seriesName,
-        proxy: 'http://192.168.3.1:8080'
+        //proxy: 'http://192.168.3.1:8080'
       };
       request.get(option, function(error, response, body) {
         if (error) return next(error);
@@ -79,7 +79,7 @@ apiRouter.post('/shows', function(req, res, next) {
     function(seriesId, callback) {
       var option={
         url:'http://thetvdb.com/api/' + apiKey + '/series/' + seriesId + '/all/en.xml',
-        proxy: 'http://192.168.3.1:8080'
+        //proxy: 'http://192.168.3.1:8080'
       };
       request.get(option, function(error, response, body) {
         if (error) return next(error);
@@ -116,9 +116,16 @@ apiRouter.post('/shows', function(req, res, next) {
       });
     },
     function(show, callback) {
-      var option={
+      var url = 'http://thetvdb.com/banners/' + show.poster;
+      request({ url: url, encoding: null }, function(error, response, body) {
+        show.poster = 'data:' + response.headers['content-type'] + ';base64,' + body.toString('base64');
+        callback(error, show);
+      });
+      //comment the above lines of code and uncomment the below lines of code if
+      //you want to save the posters in the posters folder inside public dir
+      /*var option={
           url:'http://thetvdb.com/banners/' + show.poster,
-          proxy: 'http://192.168.3.1:8080',
+          //proxy: 'http://192.168.3.1:8080',
           encoding:'binary'
       };
       request.get(option, function (err, response, body) {
@@ -130,7 +137,7 @@ apiRouter.post('/shows', function(req, res, next) {
             show.poster=show.poster;
             callback(err,show);
         });
-      });
+      });*/
     }
   ], function(err, show) {
     if (err) return next(err);
