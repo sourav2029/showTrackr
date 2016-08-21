@@ -1,6 +1,5 @@
 var Agenda=require('agenda');
 var nodemailer = require('nodemailer');
-var Show=require('../models/showSchema');
 var smtpTransport = require("nodemailer-smtp-transport")
 var agenda = new Agenda({
   db: { address: 'mongodb://localhost:27017/test' }
@@ -21,7 +20,7 @@ agenda.define('send email alert', function(job, done) {
     });
 
     var upcomingEpisode = show.episodes.filter(function(episode) {
-      return new Date(episode.firstAired) > new Date();//change it to > later
+      return new Date(episode.firstAired) > new Date();
     })[0];
     var options = {
       service: "Gmail",  // sets automatically host, port and connection security settings
@@ -32,16 +31,14 @@ agenda.define('send email alert', function(job, done) {
       };
     var transporter = nodemailer.createTransport(smtpTransport(options));
     var mailOptions = {
-      from: 'souravprem77@gmail.com',
+      from: 'Sourav Prem<norepply@showTrackr>',
       to: emails.join(','),
       subject: show.name + ' is starting soon!',
       text: show.name + ' starts in less than 2 hours on ' + show.network + '.\n\n' +
         'Episode ' + upcomingEpisode.episodeNumber + ' Overview\n\n' + upcomingEpisode.overview
     };
-    console.log( mailOptions);
-    console.log(emails);
-    transporter.sendMail(mailOptions, function(error, response) {
-      console.log(response);
+
+    smtpTransport.sendMail(mailOptions, function(error, response) {
       console.log('Message sent: ' + response.message);
       done();
     });
@@ -63,7 +60,7 @@ var options = {
   var transporter = nodemailer.createTransport(smtpTransport(options));
   // setup e-mail data with unicode symbols
   var mailOptions = {
-      from: 'souravprem77@gmail.com', // sender address
+      from: '"souravprem77@gmail.com', // sender address
       to: 'sourav.prem@mypat.in', // list of receivers
       subject: 'Hello ✔', // Subject line
       text: 'Hello world 🐴', // plaintext body
