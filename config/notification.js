@@ -2,7 +2,8 @@ var Agenda=require('agenda');
 var nodemailer = require('nodemailer');
 var smtpTransport = require("nodemailer-smtp-transport")
 var agenda = new Agenda({
-  db: { address: 'mongodb://localhost:27017/test' }
+  //db: { address: 'mongodb://localhost:27017/test' }
+  db:{address:'mongodb://sourav:2012@mnnit2029@ds013366.mlab.com:13366/showtrakr'}
 }, function(err) {
   if (err) {
     console.log(err);

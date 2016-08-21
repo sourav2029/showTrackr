@@ -11,7 +11,7 @@ var User=require('./models/userSchema');
 var session = require('express-session');
 var apiRouter=require('./routes/apiRouter');
 
-mongoose.connect('localhost');
+mongoose.connect('mongodb://sourav:2012@mnnit2029@ds013366.mlab.com:13366/showtrakr');
 app.disable('etag');
 // uncomment after placing your favicon in /public
 
