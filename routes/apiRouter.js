@@ -116,7 +116,12 @@ apiRouter.post('/shows', function(req, res, next) {
       });
     },
     function(show, callback) {
-      var option={
+      var url = 'http://thetvdb.com/banners/' + show.poster;
+      request({ url: url, encoding: null }, function(error, response, body) {
+        show.poster = 'data:' + response.headers['content-type'] + ';base64,' + body.toString('base64');
+        callback(error, show);
+      });
+      /*var option={
           url:'http://thetvdb.com/banners/' + show.poster,
           //proxy: 'http://192.168.3.1:8080',
           encoding:'binary'
@@ -130,7 +135,7 @@ apiRouter.post('/shows', function(req, res, next) {
             show.poster=show.poster;
             callback(err,show);
         });
-      });
+      });*/
     }
   ], function(err, show) {
     if (err) return next(err);
